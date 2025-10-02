@@ -20,17 +20,19 @@ export const TodoList: React.FC<TodoProps> = ({
   selectedTodoId = null,
   onTodoDeselect,
 }) => {
-  const [localSelectedTodoId, setLocalSelectedTodoId] = useState<number | null>(null);
-  
+  const [localSelectedTodoId, setLocalSelectedTodoId] = useState<number | null>(
+    null,
+  );
+
   // Reset local selected state when parent selected state changes
   useEffect(() => {
     if (selectedTodoId === null) {
       setLocalSelectedTodoId(null);
     }
   }, [selectedTodoId]);
-  
+
   const currentSelectedId = selectedTodoId || localSelectedTodoId;
-  
+
   let filteredTodos: Todo[] | null = null;
 
   // First filter by status
@@ -52,7 +54,7 @@ export const TodoList: React.FC<TodoProps> = ({
   // Then filter by search query (case insensitive)
   if (searchQuery && filteredTodos) {
     filteredTodos = filteredTodos.filter(todo =>
-      todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+      todo.title.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }
 

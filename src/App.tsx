@@ -64,7 +64,7 @@ export const App: React.FC = () => {
             <h1 className="title">Todos:</h1>
 
             <div className="block">
-              <TodoFilter 
+              <TodoFilter
                 handleFilterChange={handleFilterChange}
                 searchQuery={searchQuery}
                 onSearchChange={handleSearchChange}
@@ -86,11 +86,7 @@ export const App: React.FC = () => {
         </div>
       </div>
       {isOpen && singleToDo && (
-        <TodoModal
-          onClose={handleModalClose}
-          user={user}
-          todo={singleToDo}
-        />
+        <TodoModal onClose={handleModalClose} user={user} todo={singleToDo} />
       )}
     </>
   );

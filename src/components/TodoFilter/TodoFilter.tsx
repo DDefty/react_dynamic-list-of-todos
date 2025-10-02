@@ -7,10 +7,10 @@ type Props = {
   onSearchChange: (query: string) => void;
 };
 
-export const TodoFilter: React.FC<Props> = ({ 
-  handleFilterChange, 
-  searchQuery, 
-  onSearchChange 
+export const TodoFilter: React.FC<Props> = ({
+  handleFilterChange,
+  searchQuery,
+  onSearchChange,
 }) => {
   const [filterOption, setFilterOption] = useState<Filter>('all');
 
@@ -46,7 +46,7 @@ export const TodoFilter: React.FC<Props> = ({
           className="input"
           placeholder="Search..."
           value={searchQuery}
-          onChange={(e) => onSearchChange(e.target.value)}
+          onChange={e => onSearchChange(e.target.value)}
         />
         <span className="icon is-left">
           <i className="fas fa-magnifying-glass" />
