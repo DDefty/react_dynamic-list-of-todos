@@ -27,6 +27,7 @@ export const TodoFilter: React.FC<Props> = ({
             value={filter}
             onChange={e => {
               const newFilter = e.target.value as Filter;
+
               onFilterChange(newFilter);
             }}
           >
