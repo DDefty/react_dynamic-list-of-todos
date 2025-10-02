@@ -33,7 +33,7 @@ export const App: React.FC = () => {
     setFilterTodos(filter);
   };
 
-  const handleModalVisible = (Id: number, todo: Todo) => {
+  const handleTodoSelect = (Id: number, todo: Todo) => {
     setIsOpen(true);
     setSingleTodo(todo);
     setSelectedTodoId(todo.id);
@@ -65,7 +65,8 @@ export const App: React.FC = () => {
 
             <div className="block">
               <TodoFilter
-                handleFilterChange={handleFilterChange}
+                filter={filterTodos}
+                onFilterChange={handleFilterChange}
                 searchQuery={searchQuery}
                 onSearchChange={handleSearchChange}
               />
@@ -76,7 +77,7 @@ export const App: React.FC = () => {
               <TodoList
                 todos={toDoList}
                 filter={filterTodos}
-                handleModal={handleModalVisible}
+                onTodoSelect={handleTodoSelect}
                 searchQuery={searchQuery}
                 selectedTodoId={selectedTodoId}
                 onTodoDeselect={handleTodoDeselect}

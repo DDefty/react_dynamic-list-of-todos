@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/indent */
 import React, { useState, useEffect } from 'react';
+import classNames from 'classnames';
 import { Todo } from '../../types/Todo';
 import { Filter } from '../../App';
 
 type TodoProps = {
   todos: Todo[] | null;
   filter: Filter;
-  handleModal: (Id: number, todo: Todo) => void;
+  onTodoSelect: (Id: number, todo: Todo) => void;
   searchQuery?: string;
   selectedTodoId?: number | null;
   onTodoDeselect?: () => void;
@@ -15,7 +16,7 @@ type TodoProps = {
 export const TodoList: React.FC<TodoProps> = ({
   todos,
   filter,
-  handleModal,
+  onTodoSelect,
   searchQuery = '',
   selectedTodoId = null,
   onTodoDeselect,
@@ -58,9 +59,9 @@ export const TodoList: React.FC<TodoProps> = ({
     );
   }
 
-  const handleTodoSelect = (userId: number, todo: Todo) => {
+  const handleTodoSelectClick = (userId: number, todo: Todo) => {
     setLocalSelectedTodoId(todo.id);
-    handleModal(userId, todo);
+    onTodoSelect(userId, todo);
   };
 
   const handleTodoDeselect = () => {
@@ -102,11 +103,12 @@ export const TodoList: React.FC<TodoProps> = ({
                   ) : null}
                 </td>
                 <td className="is-vcentered is-expanded">
-                  {!todo.completed ? (
-                    <p className="has-text-danger">{todo.title}</p>
-                  ) : (
-                    <p className="has-text-success">{todo.title}</p>
-                  )}
+                  <p className={classNames({
+                    'has-text-danger': !todo.completed,
+                    'has-text-success': todo.completed,
+                  })}>
+                    {todo.title}
+                  </p>
                 </td>
                 <td className="has-text-right is-vcentered">
                   {currentSelectedId === todo.id ? (
@@ -125,7 +127,7 @@ export const TodoList: React.FC<TodoProps> = ({
                       data-cy="selectButton"
                       className="button"
                       type="button"
-                      onClick={() => handleTodoSelect(todo.userId, todo)}
+                      onClick={() => handleTodoSelectClick(todo.userId, todo)}
                     >
                       <span className="icon">
                         <i className="fa fa-eye" />

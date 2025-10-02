@@ -1,19 +1,19 @@
 import { Filter } from '../../App';
-import React, { useState } from 'react';
+import React from 'react';
 
 type Props = {
-  handleFilterChange: (filter: Filter) => void;
+  filter: Filter;
+  onFilterChange: (filter: Filter) => void;
   searchQuery: string;
   onSearchChange: (query: string) => void;
 };
 
 export const TodoFilter: React.FC<Props> = ({
-  handleFilterChange,
+  filter,
+  onFilterChange,
   searchQuery,
   onSearchChange,
 }) => {
-  const [filterOption, setFilterOption] = useState<Filter>('all');
-
   const handleClearSearch = () => {
     onSearchChange('');
   };
@@ -24,12 +24,10 @@ export const TodoFilter: React.FC<Props> = ({
         <span className="select">
           <select
             data-cy="statusSelect"
-            value={filterOption}
+            value={filter}
             onChange={e => {
               const newFilter = e.target.value as Filter;
-
-              setFilterOption(newFilter);
-              handleFilterChange(newFilter);
+              onFilterChange(newFilter);
             }}
           >
             <option value="all">All</option>
